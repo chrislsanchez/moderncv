@@ -48,7 +48,6 @@
 \renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
 %   to redefine the bibliography heading string ("Publications")
 %\renewcommand{\refname}{Articles}
-
 \makeatletter
 
 \renewcommand*{\recomputeletterlengths}{%
@@ -68,19 +67,19 @@
       {\bfseries\upshape\@firstname~\@familyname}\@firstdetailselementfalse%
       \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
         \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}}%
-      \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
-      \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
-      \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
-      \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
+      %\ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
+      %\ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
+      %\ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
+      %\ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
       \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}%
     \end{minipage}\\[2em]
   % recipient block
-  \quad \begin{minipage}[t]{.5\textwidth}                  %%%  Changed here 
+   \begin{minipage}[t]{.5\textwidth}                  %%%  Changed here 
     \raggedright%
     \addressfont%
-    {\bfseries\upshape\@recipientname}\\%
-    \@recipientaddress\\[2em]%
+    {\upshape\@recipientname}\\%
+    \@recipientaddress\\%
    %%% Changed here
   \end{minipage}
   % date
@@ -109,6 +108,7 @@
     \vfill%
     {\color{color2}\itshape\enclname: \@enclosure}}}
 \makeatother
+
 
 
 
@@ -207,7 +207,7 @@ Detailed achievements:%
 %-----       letter       ---------------------------------------------------------
 % recipient data
 \recipient{Company Recruitment team}{Company, Inc.\\123 somestreet\\some city}
-\date{January 01, 1984}
+\date{März 2022}
 \opening{Dear Sir or Madam,}
 \closing{Yours faithfully,}
 \enclosure[Attached]{curriculum vit\ae{}}          % use an optional argument to use a string other than "Enclosure", or redefine \enclname
