@@ -9,7 +9,7 @@
 \documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % moderncv themes
-\moderncvstyle{casual}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
 \moderncvcolor{blue}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
 %\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
 %\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
@@ -48,6 +48,69 @@
 \renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
 %   to redefine the bibliography heading string ("Publications")
 %\renewcommand{\refname}{Articles}
+
+\makeatletter
+
+\renewcommand*{\recomputeletterlengths}{%
+  \recomputecvlengths%
+  \setlength{\parskip}{6\p@}}
+
+\newcommand*{\subject}[1]{\def\@subject{#1}}                    %% new command added
+
+\renewcommand*{\makelettertitle}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputeletterlengths%
+  % sender contact info
+  %\hfill%                                      %%% <========== This commented
+  \begin{minipage}{.5\textwidth}%
+    \raggedright%                               %%% \reggedleft changed to raggedright                    
+    \addressfont\textcolor{color2}{%            %%% change color here if you want it black or...
+      {\bfseries\upshape\@firstname~\@familyname}\@firstdetailselementfalse%
+      \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+        \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}}%
+      \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
+      \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
+      \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
+      \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
+      \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}%
+    \end{minipage}\\[2em]
+  % recipient block
+  \quad \begin{minipage}[t]{.5\textwidth}                  %%%  Changed here 
+    \raggedright%
+    \addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress\\[2em]%
+   %%% Changed here
+  \end{minipage}
+  % date
+  %                                                 
+  \hfill% US style
+%  \\[1em]% UK style
+  \null\\[2em]%                                                         %%% Changed here    
+  \raggedright%
+  \ifthenelse{\isundefined{\@subject}}{}{%                              %% new command added
+    \begin{tabular}{ p{0.08\textwidth} p{0.92\textwidth} }
+    Objet: & \raggedright \@subject
+    \end{tabular}
+    \\[1.5em]}%
+  % opening
+    \hspace*{\fill}  \@date\\[1.5em]
+  \raggedright%
+  \@opening\\[1.5em]%
+
+  \hspace{0pt}\par\vspace{-\baselineskip}\vspace{-\parskip}}
+
+\renewcommand*{\makeletterclosing}{
+  \@closing\\[3em]%
+  {\bfseries \@firstname~\@familyname}%
+  \ifthenelse{\isundefined{\@enclosure}}{}{%
+    \\%
+    \vfill%
+    {\color{color2}\itshape\enclname: \@enclosure}}}
+\makeatother
+
+
 
 % bibliography with mutiple entries
 %\usepackage{multibib}
